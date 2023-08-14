@@ -1,39 +1,32 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# shorts_video_record_button
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+Our package provides a stylish and modern video recording button that closely resembles the familiar design seen in popular social media platforms like Instagram.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+> Instagram-style video recording button
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
-```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+    RecordButton(  
+      showLabel: true,  
+      labelColor: Colors.black12,  
+      trackColor: Colors.grey.shade300,  
+      fillColor: Colors.deepOrange,  
+      buttonColor: Colors.transparent,  
+      gradients: const [  
+        Color(0xff405de6),  
+        Color(0xff5851db),  
+        Color(0xff833ab4),  
+        Color(0xffc13584),  
+        Color(0xffe1306c),  
+        Color(0xfffd1d1d),  
+      ],  
+      onPlay: () {  
+        // Do whatever you want after play
+      },  
+      onStop: (int value) {  
+        // Do whatever you want after stop
+      },  
+      onComplete: (int value) {  
+        // Do whatever you want after complete
+      },  
+      seconds: 30,  
+    );

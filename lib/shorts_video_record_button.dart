@@ -3,7 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class RecordButton extends StatelessWidget {
+/// Stylish and modern short video recording button that closely resembles the familiar design seen in popular social media platforms like Instagram.
+class RecordButton extends StatefulWidget {
   const RecordButton({
     Key? key,
     this.seconds = 20,
@@ -38,34 +39,45 @@ class RecordButton extends StatelessWidget {
   final Function(int value) onComplete;
 
   @override
-  Widget build(BuildContext context) {
-    final RecordController recordController = RecordController(seconds: seconds, onComplete: onComplete, onPlay: onPlay, onStop: onStop);
+  State<RecordButton> createState() => _RecordButtonState();
+}
 
+class _RecordButtonState extends State<RecordButton> {
+  late _RecordController recordController;
+
+  @override
+  void initState() {
+    super.initState();
+    recordController = _RecordController(seconds: widget.seconds, onComplete: widget.onComplete, onPlay: widget.onPlay, onStop: widget.onStop);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return IgnorePointer(
-      ignoring: !enable,
+      ignoring: !widget.enable,
       child: Center(
         child: GestureDetector(
           onTap: () {
             recordController.isActive ? recordController.stop(manualStop: true) : recordController.play();
           },
           child: SizedBox(
-            width: width,
-            height: height,
+            width: widget.width,
+            height: widget.height,
             child: ListenableBuilder(
                 listenable: recordController,
                 builder: (context, child) {
                   return CustomPaint(
-                      painter: MyPainter(
+                      painter: _MyPainter(
                     value: recordController.value.toInt(),
-                    seconds: seconds,
-                    fillColor: fillColor,
-                    trackColor: trackColor,
-                    showLabel: showLabel,
-                    labelColor: labelColor,
-                    gradients: gradients,
-                    strokeCap: strokeCap,
-                    enable: enable,
-                    buttonColor: buttonColor,
+                    seconds: widget.seconds,
+                    fillColor: widget.fillColor,
+                    trackColor: widget.trackColor,
+                    showLabel: widget.showLabel,
+                    labelColor: widget.labelColor,
+                    gradients: widget.gradients,
+                    strokeCap: widget.strokeCap,
+                    enable: widget.enable,
+                    buttonColor: widget.buttonColor,
                   ));
                 }),
           ),
@@ -75,13 +87,13 @@ class RecordButton extends StatelessWidget {
   }
 }
 
-class RecordController with ChangeNotifier {
+class _RecordController with ChangeNotifier {
   final int seconds;
   VoidCallback onPlay;
   Function(int value) onStop;
   Function(int value) onComplete;
 
-  RecordController({required this.seconds, required this.onComplete, required this.onStop, required this.onPlay});
+  _RecordController({required this.seconds, required this.onComplete, required this.onStop, required this.onPlay});
 
   Timer? _timer;
   int _value = 0;
@@ -90,12 +102,6 @@ class RecordController with ChangeNotifier {
   bool get isActive => _isActive;
 
   int get value => _value;
-
-/*
-  void restart() {
-    _timer?.cancel();
-    _play();
-  }*/
 
   void play() {
     if (_timer != null) return;
@@ -127,8 +133,8 @@ class RecordController with ChangeNotifier {
   }
 }
 
-class MyPainter extends CustomPainter {
-  MyPainter({
+class _MyPainter extends CustomPainter {
+  _MyPainter({
     required this.value,
     this.trackColor,
     this.strokeCap = StrokeCap.butt,
