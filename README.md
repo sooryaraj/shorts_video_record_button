@@ -5,6 +5,10 @@ Our package provides a stylish and modern video recording button that closely re
 
 > Instagram-style video recording button
 
+![Example](https://github.com/sooryaraj/shorts_video_record_button/blob/master/assets/screenshots/shorts_video_button_sample_1.gif?raw=true)
+
+![Example 2](https://github.com/sooryaraj/shorts_video_record_button/blob/master/assets/screenshots/shorts_video_button_sample_2.gif?raw=true)
+
     RecordButton(  
       showLabel: true,  
       labelColor: Colors.black12,  
